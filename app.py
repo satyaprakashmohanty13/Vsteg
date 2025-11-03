@@ -212,6 +212,7 @@ if app_mode == "Encode":
             video_to_frames(input_video)
             frames_dir = "frames"
             files = [f for f in os.listdir(frames_dir) if os.path.isfile(os.path.join(frames_dir, f))]
+            files.sort(key=lambda x: int(x[5:-4]))
             img_name = files[len(files)//2]
             img_path = os.path.join(frames_dir, img_name)
             if not os.path.isfile(img_path):
@@ -233,6 +234,7 @@ elif app_mode == "Decode":
             video_to_frames(output_video)
             path = "./frames/"
             files = [f for f in os.listdir(path) if not f.startswith('.')]
+            files.sort(key=lambda x: int(x[5:-4]))
             for file in files:
                 filename = os.path.join(path, file)
                 img = cv2.imread(filename, cv2.IMREAD_UNCHANGED)
